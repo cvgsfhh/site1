@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+                <div  class="glassmorphism-form border-20 header text-center mb-2 p-3">
+                    <h5 class=>ساخت حساب کاربری</h5>
+                </div>
+                <div class="card-body">
+                     <div class="glassmorphism-form">
+                      <form method="POST">
+                          {% csrf_token %}
+                          {{ form.as_p }}
+                      <button class="form-control btn btn-outline-primary" type="submit">ثبت نام </button>
+                      </form>
+                     </div>
+                 </div>
+         </div>
+    </div>
+</div>
+
+{% endblock %}

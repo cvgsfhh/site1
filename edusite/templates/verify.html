@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+{% block content %}
+    <div class="glassmorphism-form">
+      <form method="post">
+       {% csrf_token %}
+       {{ form.as_p }}
+       <button class="form-control btn btn-outline-primary" type="submit">ورود</button>
+      </form>
+    <a  href ="{{my_url }}&is_sms=1">کد فعال سازی را اس ام اس کن
+    </a>
+    </div>
+{% endblock %}

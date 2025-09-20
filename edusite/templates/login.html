@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="card-body pt-3 ">
+    <div class="glassmorphism-form pt-3">
+        <form method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+            <button class="form-control btn btn-outline-primary" type="submit">ورود </button>
+        </form>
+        <a  href ="{% url 'forget_password' %}">فراموشی رمز عبور
+        </a>
+    </div>
+</div>
+{% endblock %}

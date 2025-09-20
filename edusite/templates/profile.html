@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3 class=" d-flex align-items-center justify-content-center container mt-2 btn btn-primary" style="color:white">پروفایل من </h3>
+    <div class=" row container-md">
+    <div class="row">
+            <a class="col-4 p-1" href="product/{{ products.slug }}" target="_blank">
+            <img  class="rounded" style="width:100%"  src="{{ products.logo}}"/>
+            </a>
+    </div>
+
+
+    </div>
+
+
+{% endblock %}

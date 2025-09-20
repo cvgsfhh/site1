@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row" style="background-color: #161453">
+        <div class="col-12 col-md-9 row ">
+            <b class="h3 text-center col-12 " style="color: white">{{ product.name }}</b>
+            <p class="text-start col-12 h6" style="color: white;white-space:pre-wrap">{{ product.description }}</p>
+        </div>
+        <a class="col-12 col-md-3 d-flex align-items-center justify-content-center">
+            <img style="width: 100%" src="{{ product.logo }}"></a>
+
+    </div>
+    <div class="row container-md">
+        <div>
+            <div class="row col-12 col-md-3">
+                {% if product.price > 0 %}
+                    {% if is_purchased %}
+                        <b class="btn btn-success glassmorphism-message d-flex align-items-center justify-content-center mr-2">
+                            این دوره برای شما فعال است </b>
+                    {% else %}
+                        <b class="btn btn-danger glassmorphism-message d-flex align-items-center justify-content-center mr-2">برای
+                            ورود به دوره{{ product.price }} تومان پرداخت کنید</b>
+                    {% endif %}
+                {% else %}
+                    <b class="btn btn-success glassmorphism-message d-flex align-items-center justify-content-center mr-2">
+                        این دوره برای شما رایگان است </b>
+                {% endif %}
+
+
+            </div>
+
+        </div>
+        <div class="row col-12 col-md-9">
+
+            <video width="100%" controls loop muted>
+                <source src="{{ product.video_intro }}" type="video/mp4">
+            </video>
+            <div class="border border-dark rounded-3 col-12 row m-2">
+                <h3 style="color: black" class="text-center col-12">قراره چی یاد بگیریم؟</h3>
+                <p class="text-start" style="color: black;white-space:pre-line">{{ product.content_description }}</p>
+            </div>
+        </div>
+    </div>
+
+    {% for c_category in product_content %}
+    {% endfor %}
+
+    {% for c_category in content_category %}
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{ c_category.id }}">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse{{ c_category.id }}"
+                            aria-expanded="true" aria-controls="collapse{{ c_category.id }}">
+                        {{ c_category.name }}
+                    </button>
+                </h2>
+                <div id="collapse{{ c_category.id }}" class="accordion-collapse collapse"
+                     aria-labelledby="heading{{ c_category.id }}"
+                     data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul class="text-start">
+                            {% for p_content in product_content %}
+                                {% if p_content.content_category == c_category %}
+                                    {% if is_purchased %}
+                                        <li><a href="{{ p_content.video_link }}">
+                                            {{ p_content.name }}
+                                        </a></li>
+                                    {% else %}
+                                        <li>
+                                        <div class="row d-flex align-items-center justify-content-center">
+                                            <a class="col border border-secondary rounded btn text-start">
+                                                {{ p_content.name }}
+                                            </a>
+                                            <button class="lock-button btn-outline-primary col-auto" id="lockButton">
+                                                <i class="fas fa-lock" href="{% url 'login' %}"></i>
+                                                ابتدا عضو شوید
+                                            </button>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
